@@ -82,10 +82,22 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
 
+                if(entree.getText().toString().equals("")){
+                    contacts.remove(contacts.remove(MainActivity.selectedElement));
+                    list.setAdapter(adapter);
+                }
+                else{
 
-                contacts.remove(contacts.remove(MainActivity.selectedElement));
-                list.setAdapter(adapter);
+                    for(int i = 0; i<contacts.size() ;i++){
 
+                        if (contacts.get(i).getName().equals(entree.getText().toString())) {
+                            contacts.remove(contacts.remove(i));
+                            list.setAdapter(adapter);
+
+                        }
+
+                    }
+                }
 
 
 
