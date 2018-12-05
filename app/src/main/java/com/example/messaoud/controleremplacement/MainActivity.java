@@ -6,6 +6,7 @@ import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -18,6 +19,8 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<User> contacts ;
     ListView list;
     CustomAdapter adapter;
+
+    static int selectedElement;
 
     static String input = "";
 
@@ -49,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
         Button ajouterBoutton = (Button) this.findViewById(R.id.buttonAjouter);
 
-        TextView entree = (TextView) this.findViewById(R.id.textView);
+        final EditText entree = (EditText) this.findViewById(R.id.editText);
 
         MainActivity.input = entree.getText().toString();
 
@@ -60,8 +63,9 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
 
+                contacts.add(new User(entree.getText().toString(),"", R.drawable.accessoire ));
+                list.setAdapter(adapter);
 
-                contacts.add(new User(MainActivity.input,"", R.drawable.accessoire ));
 
 
 
@@ -79,11 +83,39 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-                contacts.add(new User(MainActivity.input,"", R.drawable.accessoire ));
+                contacts.remove(contacts.remove(MainActivity.selectedElement));
+                list.setAdapter(adapter);
+
 
 
 
             }
+        });
+
+
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+
+                MainActivity.selectedElement = position;
+
+
+                //Intent intent= new Intent(getApplicationContext(),Activity2.class);
+                //intent.putExtra("Panier", panier);
+
+                //startActivity(intent);
+
+                //finish();
+                //on va changer le text de nom
+                //((EditText) findViewById (R.id.editTextName)).setText(contacts.get(position).getName());
+
+
+            }
+
         });
 
 
